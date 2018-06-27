@@ -56,7 +56,7 @@
             <div id="navbar" class="navbar-collapse collapse" aria-expanded="true" role="banner">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a>Documentation</a></li>
-                    <li><a target="_blank" href="https://github.com/admost/amrcordova/tree/master/sample/test"><i
+                    <li><a target="_blank" href="https://github.com/admost/amrcordova/tree/master/test"><i
                             class="fa fa-mobile-phone"></i>&nbsp;&nbsp;Sample App</a></li>
                     <li class="hero"><a
                             target="_blank" href="https://github.com/admost/AMR-CORDOVA-PLUGIN"><i
@@ -215,6 +215,22 @@ window.plugins.Amr.hideBanner();
 window.plugins.Amr.destroyBanner();
 </code></pre>
 
+
+<pre><code class="language-java">
+document.addEventListener('onBannerReady', function(){});
+
+document.addEventListener('onBannerLoad', function(){});
+
+document.addEventListener('onBannerFail', function(e){ 
+            	alert("error: " + e.error); 
+            });
+
+document.addEventListener('onBannerShown', function(){});
+
+document.addEventListener('onBannerDestroy', function(){});
+
+</code></pre>
+
                 
                 <h3 id="interstitial">Interstitial</h3>
 
@@ -223,20 +239,53 @@ window.plugins.Amr.destroyBanner();
 window.plugins.Amr.loadInterstitial({"amrInterstitialZoneId" : "< ADMOST_INTERSTITIAL_ZONE_ID >"});
                 
 window.plugin.Amr.showInterstitial();
+
+window.plugins.Amr.destroyInterstitial();
                 
                 
                 
                 </code></pre>
+<pre><code class="language-java">
+document.addEventListener('onInterstitialReady', function(){});
+
+document.addEventListener('onInterstitialFail', function(e){ 
+            	alert("error: " + e.error); 
+            });
+
+document.addEventListener('onInterstitialShown', function(){});
+
+document.addEventListener('onInterstitialDismiss', function(){});
+
+</code></pre>
 
                 
-                <pre><code class="language-java">window.plugins.Amr.destroyInterstitial();</code></pre>
+                
                 <h3 id="rewarded">Rewarded</h3>
 
                 <pre><code class="language-java">window.plugins.Amr.loadRewardedVideo({"amrVideoZoneId" : "< ADMOST_VIDEO_ZONE_ID >"});
                 
 window.plugins.Amr.showRewardedVideo(); 
+
 window.plugins.Amr.destroyRewardedVideo(); 
 </code></pre>
+
+
+<pre><code class="language-java">
+document.addEventListener('onVideoReady', function(){});
+
+document.addEventListener('onVideoReward', function(){});
+
+document.addEventListener('onVideoFail', function(e){ 
+            	alert("error: " + e.error); 
+            });
+
+document.addEventListener('onVideoShown', function(){});
+
+document.addEventListener('onVideoDismiss', function(){});
+
+</code></pre>
+
+
 
                 
                 
