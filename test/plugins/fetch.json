@@ -1,0 +1,18 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-amr": {
+    "source": {
+      "type": "local",
+      "path": "/Users/Seyma/Documents/Cordova/test/node_modules/Cordova-Plugin-AMR"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}
