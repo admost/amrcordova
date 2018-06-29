@@ -28,8 +28,22 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-        var consent = document.getElementById("consent");
-        var subjectToGdpr = document.getElementById("subjectToGdpr");
+        var consent;
+        var subjectToGdpr;
+        if (document.getElementById("consent") == true){
+            consent = "1";
+        }
+        else {
+            consent = "0";
+        }
+        
+        if (document.getElementById("subjectToGdpr") == true){
+            subjectToGdpr = "1";
+        }
+        else {
+            subjectToGdpr = "0";
+        }
+        
         var inputs = {"amrAppId" : "6cc8e89a-b52a-4e9a-bb8c-579f7ec538fe", "amrInterstitialZoneId" : "f99e409b-f9ab-4a2e-aa9a-4d143e6809ae", "amrBannerZoneId" : "86644357-21d0-45a4-906a-37262461df65", "amrVideoZoneId" : "88cfcfd0-2f8c-4aba-9f36-cc0ac99ab140", "userConsent" : consent, "subjectToGdpr" : subjectToGdpr};
         
         
