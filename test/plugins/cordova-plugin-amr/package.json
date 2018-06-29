@@ -1,6 +1,6 @@
 {
   "_from": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-  "_id": "Cordova-Plugin-AMR@0.0.1",
+  "_id": "Cordova-Plugin-AMR@1.0.0",
   "_inBundle": false,
   "_location": "/Cordova-Plugin-AMR",
   "_phantomChildren": {},
@@ -16,7 +16,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git#fcec66265a458071f8f70da53c84c49ff74f0694",
+  "_resolved": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git#8f4e533ca63b158f5e35ceb21fcee031856354ae",
   "_spec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
   "_where": "/Users/Seyma/Documents/GitHub/amrcordova/amrcordova/test",
   "author": {
@@ -38,7 +38,7 @@
   "engines": [
     {
       "name": "cordova",
-      "version": ">=4.0.0"
+      "version": ">=8.0.0"
     }
   ],
   "homepage": "https://github.com/admost/AMR-CORDOVA-PLUGIN#readme",
@@ -74,5 +74,5 @@
     "type": "git",
     "url": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git"
   },
-  "version": "0.0.1"
+  "version": "1.0.0"
 }
