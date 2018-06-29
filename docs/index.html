@@ -146,8 +146,15 @@
             <section>
                 <h2 id="overview">Overview</h2>
                 <p>The following document detaily shows that how to integrate AMR Cordova Plugin and networks. You can download plugin <a href="https://github.com/admost/AMR-CORDOVA-PLUGIN">here</a></p>
-                    
+                
+                After you download make sure you change applovin.sdk.key in plugin.xml. 
             
+               <pre><code>
+               &lt;meta-data
+    android:name="applovin.sdk.key"
+    android:value="YOUR SDK KEY"/&gt;
+                </code></pre>
+                
                     
             <code>cordova plugin add /plugin/location</code> 
             </section>
@@ -179,7 +186,7 @@
                 <h3 id="init">Init Ads</h3>
                 <p>Initialize the Admost Mediation SDK in your application’s launcher Activity. This starts pre-caching
                     and prepares the SDK to display ads.</p>
-                <pre><code class="language-java"> 
+                <pre><code class="language-javascript"> 
 var inputs = {"amrAppId" : " < ADMOST_APP_ID > ", "userConsent" : " < userConsent > ", "subjectToGdpr" : " < subjectToGdpr > "};
         
         
@@ -195,7 +202,7 @@ window.plugins.Amr.startWithConfig(inputs);</code></pre>
 				
 
                 <h3 id="banner-ads">Banner Ads</h3>
-                <pre><code class="language-java">/*
+                <pre><code class="language-javascript">/*
 ZONE_ID : Your ZONE_ID defined on admost mediation panels.
 TYPE    : The height of your banner, it may have 3 values;
             1. AdMostManager.getInstance().AD_BANNER (50dp)
@@ -216,7 +223,7 @@ window.plugins.Amr.destroyBanner();
 </code></pre>
 
 
-<pre><code class="language-java">
+<pre><code class="language-javascript">
 document.addEventListener('onBannerReady', function(){});
 
 document.addEventListener('onBannerLoad', function(){});
@@ -234,9 +241,8 @@ document.addEventListener('onBannerDestroy', function(){});
                 
                 <h3 id="interstitial">Interstitial</h3>
 
-                <pre><code class="language-java">
-                
-window.plugins.Amr.loadInterstitial({"amrInterstitialZoneId" : "< ADMOST_INTERSTITIAL_ZONE_ID >"});
+                <pre><code class="language-javascript">               
+window.plugins.Amr.loadInterstitial({"amrInterstitialZoneId" : "< ADMOST_INTERSTITIAL_ZONE_ID >", "autoShowInterstitial": true/false});
                 
 window.plugin.Amr.showInterstitial();
 
@@ -245,7 +251,7 @@ window.plugins.Amr.destroyInterstitial();
                 
                 
                 </code></pre>
-<pre><code class="language-java">
+<pre><code class="language-javascript">
 document.addEventListener('onInterstitialReady', function(){});
 
 document.addEventListener('onInterstitialFail', function(e){ 
@@ -262,7 +268,7 @@ document.addEventListener('onInterstitialDismiss', function(){});
                 
                 <h3 id="rewarded">Rewarded</h3>
 
-                <pre><code class="language-java">window.plugins.Amr.loadRewardedVideo({"amrVideoZoneId" : "< ADMOST_VIDEO_ZONE_ID >"});
+                <pre><code class="language-javascript">window.plugins.Amr.loadRewardedVideo({"amrVideoZoneId" : "< ADMOST_VIDEO_ZONE_ID >", "autoShowVideo" : true/false});
                 
 window.plugins.Amr.showRewardedVideo(); 
 
@@ -270,7 +276,7 @@ window.plugins.Amr.destroyRewardedVideo();
 </code></pre>
 
 
-<pre><code class="language-java">
+<pre><code class="language-javascript">
 document.addEventListener('onVideoReady', function(){});
 
 document.addEventListener('onVideoReward', function(){});
@@ -351,9 +357,9 @@ document.addEventListener('onVideoDismiss', function(){});
                     To use Test Suite in your application, you can use following code;
                 </p>
 
-                <pre><code class="language-java">
+                <pre><code class="language-javascript">
                 
-                window.plugins.Amr.startTestSuite;
+                window.plugins.Amr.startTestSuite();
 
                 </code></pre>
 
