@@ -1,0 +1,78 @@
+{
+  "_from": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
+  "_id": "Cordova-Plugin-AMR@0.0.1",
+  "_inBundle": false,
+  "_location": "/Cordova-Plugin-AMR",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
+    "rawSpec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
+    "saveSpec": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
+    "fetchSpec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git#fcec66265a458071f8f70da53c84c49ff74f0694",
+  "_spec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
+  "_where": "/Users/Seyma/Documents/GitHub/amrcordova/amrcordova/test",
+  "author": {
+    "name": "Kokteyl"
+  },
+  "bugs": {
+    "url": "https://github.com/admost/AMR-CORDOVA-PLUGIN/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-amr",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Admost Mediation Router plugin.",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "homepage": "https://github.com/admost/AMR-CORDOVA-PLUGIN#readme",
+  "keywords": [
+    "admob",
+    "google",
+    "cordova-ios",
+    "cordova-android",
+    "ecosystem:cordova",
+    "android",
+    "ios",
+    "money",
+    "monetization",
+    "play",
+    "win",
+    "earn",
+    "publicity",
+    "advertisement",
+    "advertising",
+    "ads",
+    "ad",
+    "eclipse",
+    "android studio",
+    "cordova-amr",
+    "amr",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "ISC",
+  "name": "Cordova-Plugin-AMR",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git"
+  },
+  "version": "0.0.1"
+}

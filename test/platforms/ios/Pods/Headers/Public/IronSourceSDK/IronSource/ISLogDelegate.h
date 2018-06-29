@@ -1,0 +1,1 @@
+../../../../IronSourceSDK/IronSource/IronSource.framework/Versions/A/Headers/ISLogDelegate.h

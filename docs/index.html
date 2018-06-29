@@ -149,10 +149,16 @@
                 
                 After you download make sure you change applovin.sdk.key in plugin.xml. 
             
-               <pre><code>
-               &lt;meta-data
+               <pre><code>///Android 
+&lt;meta-data
     android:name="applovin.sdk.key"
     android:value="YOUR SDK KEY"/&gt;
+    
+    
+///IOS
+&lt;config-file target="*-Info.plist" parent="AppLovinSdkKey"&gt;
+        &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
+&lt; /config-file&gt;
                 </code></pre>
                 
                     
@@ -187,7 +193,7 @@
                 <p>Initialize the Admost Mediation SDK in your application’s launcher Activity. This starts pre-caching
                     and prepares the SDK to display ads.</p>
                 <pre><code class="language-javascript"> 
-var inputs = {"amrAppId" : " < ADMOST_APP_ID > ", "userConsent" : " < userConsent > ", "subjectToGdpr" : " < subjectToGdpr > "};
+var inputs = {"applicationIdAndroid" : " < ADMOST_ANDROID_APP_ID > ","applicationIdIOS" : " < ADMOST_IOS_APP_ID > ", "userConsent" : " < userConsent >", "subjectToGdpr" : " < subjectToGdpr > "};
         
         
 window.plugins.Amr.startWithConfig(inputs);</code></pre>
@@ -196,26 +202,15 @@ window.plugins.Amr.startWithConfig(inputs);</code></pre>
 
                <h4 id="initgdpr">GDPR</h4>
 			     <p> Once you have collected the user’s consent, you can pass it onto the SDK using the init configuration parameters shown above.  </p> 
-				  <p><code>"userConsent" : " < userConsent > "</code> has a boolean parameter. If you have the user’s consent, set it true. If you do not have the user's consent, set it false.  </p>
-				  <p><code>"subjectToGdpr" : " < subjectToGdpr > "</code> has a boolean parameter. If you know the user is subject to GDPR, set it true. If you know the user is not subject to GDPR, set it false. </p> 
+				  <p><code>"userConsent" : " < userConsent > "</code> If you have the user’s consent, set it "1". If you do not have the user's consent, set it "0".  </p>
+				  <p><code>"subjectToGdpr" : " < subjectToGdpr > "</code> If you know the user is subject to GDPR, set it "1". If you know the user is not subject to GDPR, set it "0". </p> 
 				 <p>If you don’t pass the user’s consent or subjectToGDPR to the SDK, the rules described in  <a href="#gdprrules">GDPR</a>  have been applied.  </p>
 				
 
                 <h3 id="banner-ads">Banner Ads</h3>
-                <pre><code class="language-javascript">/*
-ZONE_ID : Your ZONE_ID defined on admost mediation panels.
-TYPE    : The height of your banner, it may have 3 values;
-            1. AdMostManager.getInstance().AD_BANNER (50dp)
-            2. AdMostManager.getInstance().AD_LEADERBOARD (90dp)
-            3. AdMostManager.getInstance().AD_MEDIUM_RECTANGLE (250dp)
-BINDER  : You can use your own layout design for banners, if you leave BINDER value null, default design will be applied.
-*/
+                <pre><code class="language-javascript">
 
-
-
- "amrVideoZoneId" : "< ADMOST_BANNER_VIDEO_ID >"
-
-window.plugins.Amr.loadBanner({"amrBannerZoneId" : "< ADMOST_BANNER_ZONE_ID >"});
+window.plugins.Amr.loadBanner({"bannerIdAndroid" : "< ADMOST_ANDROID_BANNER_ZONE_ID >","bannerIdIOS" : "< ADMOST_IOS_BANNER_ZONE_ID >"});
 
 window.plugins.Amr.hideBanner();
 
@@ -232,7 +227,7 @@ document.addEventListener('onBannerFail', function(e){
             	alert("error: " + e.error); 
             });
 
-document.addEventListener('onBannerShown', function(){});
+document.addEventListener('onBannerShow', function(){});
 
 document.addEventListener('onBannerDestroy', function(){});
 
@@ -242,7 +237,7 @@ document.addEventListener('onBannerDestroy', function(){});
                 <h3 id="interstitial">Interstitial</h3>
 
                 <pre><code class="language-javascript">               
-window.plugins.Amr.loadInterstitial({"amrInterstitialZoneId" : "< ADMOST_INTERSTITIAL_ZONE_ID >", "autoShowInterstitial": true/false});
+window.plugins.Amr.loadInterstitial({"interstitialIdAndroid" : "< ADMOST_ANDROID_INTERSTITIAL_ZONE_ID >", "interstitialIdIOS" : "< ADMOST_IOS_INTERSTITIAL_ZONE_ID >", "autoShowInterstitial": true/false});
                 
 window.plugin.Amr.showInterstitial();
 
@@ -258,7 +253,7 @@ document.addEventListener('onInterstitialFail', function(e){
             	alert("error: " + e.error); 
             });
 
-document.addEventListener('onInterstitialShown', function(){});
+document.addEventListener('onInterstitialShow', function(){});
 
 document.addEventListener('onInterstitialDismiss', function(){});
 
@@ -285,7 +280,7 @@ document.addEventListener('onVideoFail', function(e){
             	alert("error: " + e.error); 
             });
 
-document.addEventListener('onVideoShown', function(){});
+document.addEventListener('onVideoShow', function(){});
 
 document.addEventListener('onVideoDismiss', function(){});
 
@@ -310,11 +305,11 @@ document.addEventListener('onVideoDismiss', function(){});
 				
 					 <p>Admost provides you two input parameter for GDPR compatibility:  <code>"subjectToGdpr" </code> and <code>"userConsent"</code>. </p>
 					 <p>If you can determine whether the user is located in European Union or not, you can use optional <code>"subjectToGdpr"</code> to set user's subject to GDPR flag. If you do not use this method, subjectToGdpr status remains as unknown. In this case, Admost SDK will try to determine whether the user is in EU or not which is totally under the responsibility of you. If the user is in EU, networks are not allowed to show personalized ads. If the user is not located in EU, the ad networks are allowed to show personalized ads. </p>
-					<p>On condition that you want to obtain neither user's subjectToGdpr status nor any negative legal consequences, SubjectToGDPR must set <code> "subjectToGdpr": true </code> for each user. In this case, Admost considers all users as subject to GDPR and if the consent is not allowed, Admost blocks ad networks to collect data from users. Which may cause a decrease in overall revenue performance apart from Admost. </p>
-					<p>If you obtain user's consent and set <code>"userConsent": true </code>, personalized ads would be shown to the users. Otherwise, you set <code>"userConsent": false</code> which would block the personalized ads, unless the user is not subject to GDPR. </p>
-					<p>If you do not use<code>"userConsent"</code>, user consent status remains unknown. In this case, if you provide <code>"subjectToGdpr": true</code>, the ad networks do not have the ability to serve personalized ads. If you provide <code>"subjectToGdpr": false </code>, the ad networks have the ability to serve personalized ads. </p>
+					<p>On condition that you want to obtain neither user's subjectToGdpr status nor any negative legal consequences, SubjectToGDPR must set <code> "subjectToGdpr": "1" </code> for each user. In this case, Admost considers all users as subject to GDPR and if the consent is not allowed, Admost blocks ad networks to collect data from users. Which may cause a decrease in overall revenue performance apart from Admost. </p>
+					<p>If you obtain user's consent and set <code>"userConsent": "1" </code>, personalized ads would be shown to the users. Otherwise, you set <code>"userConsent": "0"</code> which would block the personalized ads, unless the user is not subject to GDPR. </p>
+					<p>If you do not use<code>"userConsent"</code>, user consent status remains unknown. In this case, if you provide <code>"subjectToGdpr": "1"</code>, the ad networks do not have the ability to serve personalized ads. If you provide <code>"subjectToGdpr": "0" </code>, the ad networks have the ability to serve personalized ads. </p>
 					<p>If you do not provide both <code>"userConsent"</code> and <code>"subjectToGdpr"</code>, Admost decides whether the user is located in EU or not which is totally under the responsibility of you.  </p>
-					<p>If you want to obtain neither the user's consent nor any negative legal consequences, you must set <code>"userConsent" : false </code> for every user. In this case, Admost considers the user has no consent,  the ad networks are not allowed to serve personalized ads, except only you do not provide  <code>"subjectToGdpr": false </code>.</p>
+					<p>If you want to obtain neither the user's consent nor any negative legal consequences, you must set <code>"userConsent" : "0" </code> for every user. In this case, Admost considers the user has no consent,  the ad networks are not allowed to serve personalized ads, except only you do not provide  <code>"subjectToGdpr": "0" </code>.</p>
 				
                 <h2 id="extras">Extras</h2>
 

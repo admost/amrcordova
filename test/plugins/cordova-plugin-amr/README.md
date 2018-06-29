@@ -1,0 +1,1 @@
+# amr-cordova-plugin

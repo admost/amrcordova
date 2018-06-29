@@ -1,0 +1,1 @@
+../../../../AMRSDK/AMRSDK/AMRSDK.framework/Headers/AMRBannerDelegate.h

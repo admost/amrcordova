@@ -1,0 +1,1 @@
+../../../../AMRAdapterUnity/AMRAdapterUnity/Libs/UnityAds.framework/Headers/UnityAdsExtended.h

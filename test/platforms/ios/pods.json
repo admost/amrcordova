@@ -1,0 +1,44 @@
+{
+    "AMRAdapterAdmob": {
+        "name": "AMRAdapterAdmob",
+        "type": "podspec",
+        "spec": "~> 7.31",
+        "count": 1
+    },
+    "AMRAdapterApplovin": {
+        "name": "AMRAdapterApplovin",
+        "type": "podspec",
+        "spec": "~> 5.0",
+        "count": 1
+    },
+    "AMRAdapterFacebook": {
+        "name": "AMRAdapterFacebook",
+        "type": "podspec",
+        "spec": "~> 4.28",
+        "count": 1
+    },
+    "AMRAdapterMopub": {
+        "name": "AMRAdapterMopub",
+        "type": "podspec",
+        "spec": "~> 5.0",
+        "count": 1
+    },
+    "AMRAdapterIronsource": {
+        "name": "AMRAdapterIronsource",
+        "type": "podspec",
+        "spec": "~> 6.7",
+        "count": 1
+    },
+    "AMRAdapterTapjoy": {
+        "name": "AMRAdapterTapjoy",
+        "type": "podspec",
+        "spec": "~> 11.12",
+        "count": 1
+    },
+    "AMRAdapterUnity": {
+        "name": "AMRAdapterUnity",
+        "type": "podspec",
+        "spec": "~> 2.2",
+        "count": 1
+    }
+}

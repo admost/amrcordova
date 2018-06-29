@@ -1,0 +1,34 @@
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url 'https://maven.google.com' }
+    maven { url "http://dl.appnext.com/" }
+    maven { url "https://s3.amazonaws.com/moat-sdk-builds" }
+    maven { url "https://s3.amazonaws.com/avocarrot-android-builds/dist/" }
+    maven { url 'http://repo.admost.com:8081/artifactory/amr' }
+    maven { url 'https://jitpack.io' }
+    google()
+}
+
+dependencies{
+    compile('com.mopub:mopub-sdk:5.1.0@aar') {
+        transitive = true
+    }
+}
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        minSdkVersion 19
+        multiDexEnabled true
+    }
+
+  packagingOptions {
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'assets/*.png'
+    exclude 'values/*.xml'
+  }
+}
