@@ -47,10 +47,10 @@ public class Amr extends CordovaPlugin {
     private static final String ACTION_TRACK_PURCHASE_FOR_ANDROID = "trackPurchaseForAndroid";
 
     /** config **/
-    private static final String OPT_AMR_APP_ID = "amrAppId";
-    private static final String OPT_INTERSTITIAL_ZONE_ID = "amrInterstitialZoneId";
-    private static final String OPT_BANNER_ZONE_ID = "amrBannerZoneId";
-    private static final String OPT_VIDEO_ZONE_ID = "amrVideoZoneId";
+    private static final String OPT_AMR_APP_ID = "applicationIdAndroid";
+    private static final String OPT_INTERSTITIAL_ZONE_ID = "interstitialIdAndroid";
+    private static final String OPT_BANNER_ZONE_ID = "bannerIdAndroid";
+    private static final String OPT_VIDEO_ZONE_ID = "videoIdAndroid";
     private static final String OPT_AD_SIZE = "adSize";
     private static final String OPT_BANNER_AT_TOP = "bannerAtTop";
     private static final String OPT_OVERLAP = "overlap";
@@ -160,6 +160,9 @@ public class Amr extends CordovaPlugin {
 
         }else if (ACTION_SHOW_INTERSTITIAL.equals(action)) {
             result = executeShowInterstitial(callbackContext);
+        
+        }else if (ACTION_DESTROY_INTERSTITIAL.equals(action)) {
+            result = executeDestroyInterstitial(callbackContext);
 
         }else if (ACTION_LOAD_REWARDED_VIDEO.equals(action)) {
             JSONObject config = inputs.optJSONObject(0);
@@ -167,6 +170,10 @@ public class Amr extends CordovaPlugin {
 
         } else if (ACTION_SHOW_REWARDED_VIDEO.equals(action)) {
             result = executeShowRewardedVideo(callbackContext);
+        
+        }else if (ACTION_DESTROY_REWARDED_VIDEO.equals(action)) {
+            result = executeDestroyRewardedVideo(callbackContext);
+
 
         }else if (ACTION_LOAD_BANNER.equals(action)) {
             JSONObject config = inputs.optJSONObject(0);
@@ -222,7 +229,7 @@ public class Amr extends CordovaPlugin {
         this.AMRSdkConfig( config );
 
         if(this.amrAppId.length() < 5){
-            Log.e(LOGTAG, "Please set amrAppId parameter.");
+            Log.e(LOGTAG, "Please set applicationIdAndroid parameter.");
             return null;
         }
         cordova.getActivity().runOnUiThread(new Runnable(){
@@ -252,7 +259,7 @@ public class Amr extends CordovaPlugin {
         this.AMRSdkConfig( config );
 
         if(this.amrBannerZoneId.length() < 5){
-            Log.e(LOGTAG, "Please set amrBannerZoneId parameter.");
+            Log.e(LOGTAG, "Please set bannerIdAndroid parameter.");
             return null;
         }
 
@@ -264,11 +271,6 @@ public class Amr extends CordovaPlugin {
                 
                 adView = new AdMostView(cordova.getActivity(), Amr.this.amrBannerZoneId, adSize, new AdMostViewListener() {
                     @Override
-                    public void onLoad(String network, int position) {
-                        sendResponseToListener(onBannerLoad, null);
-                        
-                    }
-                    @Override
                     public void onReady(String network,int ecpm, View adView) {
                         sendResponseToListener(onBannerReady, null);
                     
@@ -277,6 +279,10 @@ public class Amr extends CordovaPlugin {
                     @Override
                     public void onFail(int errorCode) {
                         sendResponseToListener(onBannerFail, String.format("{ 'error': %d }", errorCode));
+                    }
+                    @Override
+                    public void onClick(String network) {
+                        
                     }
 
                 }, null);
@@ -335,7 +341,7 @@ public class Amr extends CordovaPlugin {
         this.AMRSdkConfig( config );
 
         if(this.amrInterstitialZoneId.length() < 5){
-            Log.e(LOGTAG, "Please put your interstitialZoneId into the javascript code.");
+            Log.e(LOGTAG, "Please set interstitialIdAndroid parameter.");
             return null;
         }
         cordova.getActivity().runOnUiThread(new Runnable(){
@@ -372,10 +378,6 @@ public class Amr extends CordovaPlugin {
                     @Override
                     public void onComplete(String s) {
                        
-                    }
-                    @Override
-                    public void onAction(int i) {
-                        // This method has been deprecated. Kept because of backward compatibility.
                     }
                     
                 });
@@ -431,7 +433,7 @@ public class Amr extends CordovaPlugin {
         this.AMRSdkConfig( config );
 
         if(this.amrVideoZoneId.length() < 5){
-            Log.e(LOGTAG, "Please put your VideoZoneId into the javascript code.");
+            Log.e(LOGTAG, "Please set videoIdAndroid parameter.");
             return null;
         }
         cordova.getActivity().runOnUiThread(new Runnable(){
@@ -467,10 +469,7 @@ public class Amr extends CordovaPlugin {
                     public void onClicked(String s) {
                         //Ad Clicked
                     }
-                    @Override
-                    public void onAction(int i) {
-                        // This method has been deprecated. Kept because of backward compatibility.
-                    }
+                   
                 });
         
                 executeRequestVideoAd(config, callbackContext);
@@ -656,6 +655,37 @@ public class Amr extends CordovaPlugin {
         return null;
     }
     
+    private PluginResult executeDestroyRewardedVideo(final CallbackContext callbackContext) {
+         
+        cordova.getActivity().runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                if(videoAd != null) {
+                    videoAd.destroy();
+                }
+                
+            }
+        });
+
+        return null;
+    }
+    
+    private PluginResult executeDestroyInterstitial(final CallbackContext callbackContext) {
+         
+        cordova.getActivity().runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                if(interstitialAd != null) {
+                
+                    interstitialAd.destroy();
+                }
+                
+            }
+        });
+
+        return null;
+    }
+
     
 
     private PluginResult executeShowRewardedVideo(final CallbackContext callbackContext) {

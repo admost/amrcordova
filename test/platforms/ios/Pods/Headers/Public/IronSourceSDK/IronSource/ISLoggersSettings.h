@@ -1,1 +1,0 @@
-../../../../IronSourceSDK/IronSource/IronSource.framework/Versions/A/Headers/ISLoggersSettings.h

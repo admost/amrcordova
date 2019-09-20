@@ -30,27 +30,34 @@ var app = {
         this.receivedEvent('deviceready');
         var consent;
         var subjectToGdpr;
-        if (document.getElementById("consent") == true){
+        if (document.getElementById("consent") == true) {
             consent = "1";
         }
         else {
             consent = "0";
         }
         
-        if (document.getElementById("subjectToGdpr") == true){
+        if (document.getElementById("subjectToGdpr") == true) {
             subjectToGdpr = "1";
         }
         else {
             subjectToGdpr = "0";
         }
         
-     
-        var inputs = {"applicationIdAndroid" : "6cc8e89a-b52a-4e9a-bb8c-579f7ec538fe", "applicationIdIOS" : "15066ddc-9c18-492c-8185-bea7e4c7f88c" , "interstitialIdAndroid": "f99e409b-f9ab-4a2e-aa9a-4d143e6809ae", "bannerIdIOS" : "b4009772-de04-42c4-bbaa-c18da9e4a1ab" , "interstitialIdIOS" : "39f74377-5682-436a-9338-9d1c4df410bd", "videoIdIOS" : "2bdefd44-5269-4cbc-b93a-373b74a2f067" ,"bannerIdAndroid" : "86644357-21d0-45a4-906a-37262461df65", "videoIdAndroid" : "88cfcfd0-2f8c-4aba-9f36-cc0ac99ab140", "userConsent" : consent, "subjectToGdpr" : subjectToGdpr};
-        
+        var inputs = {
+            "applicationIdAndroid" : "6cc8e89a-b52a-4e9a-bb8c-579f7ec538fe",
+            "applicationIdIOS" : "15066ddc-9c18-492c-8185-bea7e4c7f88c" ,
+            "interstitialIdAndroid": "f99e409b-f9ab-4a2e-aa9a-4d143e6809ae",
+            "interstitialIdIOS" : "39f74377-5682-436a-9338-9d1c4df410bd",
+            "bannerIdAndroid" : "86644357-21d0-45a4-906a-37262461df65",
+            "bannerIdIOS" : "b4009772-de04-42c4-bbaa-c18da9e4a1ab" ,
+            "videoIdAndroid" : "88cfcfd0-2f8c-4aba-9f36-cc0ac99ab140",
+            "videoIdIOS" : "2bdefd44-5269-4cbc-b93a-373b74a2f067",
+            "userConsent" : consent,
+            "subjectToGdpr" : subjectToGdpr
+        };
         
         window.plugins.Amr.startWithConfig(inputs);
-                  
-    
         
         document.getElementById("loadBanner").addEventListener('click',  window.plugins.Amr.loadBanner);
         document.getElementById("hideBanner").addEventListener('click',  window.plugins.Amr.hideBanner);

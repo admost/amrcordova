@@ -1,31 +1,7 @@
 {
-  "_from": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-  "_id": "Cordova-Plugin-AMR@1.0.0",
-  "_inBundle": false,
-  "_location": "/Cordova-Plugin-AMR",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "git",
-    "raw": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-    "rawSpec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-    "saveSpec": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-    "fetchSpec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-    "gitCommittish": null
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git#8f4e533ca63b158f5e35ceb21fcee031856354ae",
-  "_spec": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git",
-  "_where": "/Users/Seyma/Documents/GitHub/amrcordova/amrcordova/test",
-  "author": {
-    "name": "Kokteyl"
-  },
-  "bugs": {
-    "url": "https://github.com/admost/AMR-CORDOVA-PLUGIN/issues"
-  },
-  "bundleDependencies": false,
+  "name": "Cordova-Plugin-AMR",
+  "version": "1.1.1",
+  "description": "Admost Mediation Router plugin.",
   "cordova": {
     "id": "cordova-plugin-amr",
     "platforms": [
@@ -33,15 +9,10 @@
       "ios"
     ]
   },
-  "deprecated": false,
-  "description": "Admost Mediation Router plugin.",
-  "engines": [
-    {
-      "name": "cordova",
-      "version": ">=8.0.0"
-    }
-  ],
-  "homepage": "https://github.com/admost/AMR-CORDOVA-PLUGIN#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git"
+  },
   "keywords": [
     "admob",
     "google",
@@ -68,11 +39,16 @@
     "cordova-android",
     "cordova-ios"
   ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=8.0.0"
+    }
+  ],
+  "author": "Kokteyl",
   "license": "ISC",
-  "name": "Cordova-Plugin-AMR",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/admost/AMR-CORDOVA-PLUGIN.git"
+  "bugs": {
+    "url": "https://github.com/admost/AMR-CORDOVA-PLUGIN/issues"
   },
-  "version": "1.0.0"
+  "homepage": "https://github.com/admost/AMR-CORDOVA-PLUGIN#readme"
 }

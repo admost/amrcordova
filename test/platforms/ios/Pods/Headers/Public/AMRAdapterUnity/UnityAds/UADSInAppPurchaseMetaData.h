@@ -1,1 +1,0 @@
-../../../../AMRAdapterUnity/AMRAdapterUnity/Libs/UnityAds.framework/Headers/UADSInAppPurchaseMetaData.h

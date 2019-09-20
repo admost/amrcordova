@@ -153,15 +153,21 @@
                 <h2 id="overview">Overview</h2>
                 <p>The following document detaily shows that how to integrate AMR Cordova Plugin and networks. You can download plugin <a href="https://github.com/admost/AMR-CORDOVA-PLUGIN">here</a></p>
                 
-                After you download make sure you change applovin.sdk.key in plugin.xml. 
+                After you download make sure you change AdMob and AppLovin keys in plugin.xml. 
             
                <pre><code>///Android 
+&lt;meta-data
+android:name="com.google.android.gms.ads.APPLICATION_ID"
+android:value="YOUR SDK KEY"/&gt;
 &lt;meta-data
     android:name="applovin.sdk.key"
     android:value="YOUR SDK KEY"/&gt;
     
     
 ///IOS
+&lt;config-file target="*-Info.plist" parent="GADApplicationIdentifier"&gt;
+        &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
+&lt; /config-file&gt;
 &lt;config-file target="*-Info.plist" parent="AppLovinSdkKey"&gt;
         &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
 &lt; /config-file&gt;
@@ -319,14 +325,14 @@ document.addEventListener('onVideoDismiss', function(){});
 				
                 <h2 id="extras">Extras</h2>
 
-                <h3 id="dfp">DFP/Admob Mediation Integration</h3>
+                <h3 id="dfp">DFP/AdMob Mediation Integration</h3>
 
                 <p>The AMR DFP Adapter lets publishers integrate Admost Mediation Router ads into applications with DFP
-                    or Admob Mediation set as main ad mediation layer.</p>
+                    or AdMob Mediation set as main ad mediation layer.</p>
 
-                <p>In order to show AMR ads in DFP/Admob Mediation you should first follow Setup and init phases of AMR
+                <p>In order to show AMR ads in DFP/AdMob Mediation you should first follow Setup and init phases of AMR
                     documentation. Then, you should follow dedicated steps of DFP or
-                    Admob Mediation to set AMR as an ad mediation source.</p>
+                    AdMob Mediation to set AMR as an ad mediation source.</p>
 
                 <p>After adding AMR as an ad mediation source you should define class names for banner and interstitial
                     ad custom events. Enter <code>admost.sdk.dfp.AmrDfpCustomEventBanner</code> and
@@ -341,7 +347,7 @@ document.addEventListener('onVideoDismiss', function(){});
                 <img class="img-responsive " src="assets/img/dfp_interstitial.png" alt="shadowed image">
 
 
-                <p>Now you can show AMR banner and interstitial ads via DFP or Admob Mediation.</p>
+                <p>Now you can show AMR banner and interstitial ads via DFP or AdMob Mediation.</p>
 
                 <p>You can check DFP banner and interstitial example in demo project; <a
                         href="https://github.com/admost/amrandroid/blob/master/sample/AMRSample/app/src/main/java/com/kokteyl/amrtest/DFPIntegration.java"
@@ -377,7 +383,6 @@ document.addEventListener('onVideoDismiss', function(){});
                     </div>
                 </div>
                 
-                
                  <section>
                 <h2 id="release-notes">Release Notes</h2>
 
@@ -386,13 +391,51 @@ document.addEventListener('onVideoDismiss', function(){});
                         new features, etc.</p>
 
                     <ol class="toc">
+                        <li><a href="#v1.1.1">Version 1.1.1</a></li>
                         <li><a href="#v1.0.1">Version 1.0.1</a></li>
                         
                          </ol>
                 </header>
                 
                 <section id="versions">
-					<h3 id="v1.0.1">Version 1.0.1
+					<h3 id="v1.1.1">Version 1.1.1
+                    <small class="release-date">Sept 20, 2019</small>
+                    </h3>
+                    <br>
+                    <ul class="changelog"> 
+
+                        <section id="changelog-android-1.1.1">
+                          <div class="promo left small-icon" style="">
+                                    <i class="fa fa-android" style="color: #00af97"></i>
+                                    <h3>Android</h3>
+                                </div>
+                                <ul class="changelog">
+                                </ul>      
+                        </section>
+
+                        <section id="changelog-ios-1.1.1">
+                            <div class="promo left small-icon" style="">
+                                <i class="fa fa-apple" style="color: #0b0b0b"></i>
+                                <h3>iOS</h3>
+                            </div>
+                            <ul class="changelog">
+                                    <li class="ch-added">AMR IOS SDK 1.4.13 &nbsp;&nbsp;</li>
+                                    <li class="ch-updated">AdMob 7.49 </li>
+                                    <li class="ch-added">Admost 1.2 </li>
+                                    <li class="ch-updated">AppLovin 6.8 </li>
+                                    <li class="ch-updated">Facebook 5.5 </li>
+                                    <li class="ch-updated">IronSource 6.8 </li>
+                                    <li class="ch-added">Mintegral 5.5 </li>
+                                    <li class="ch-added">MyTarget 5.3 </li>
+                                    <li class="ch-updated">UnityAds 3.2 </li>
+                                    <li class="ch-added">YandexAds 2.13 </li>
+                                    <li class="ch-added">YouAppi 4.4 </li>
+                                    
+                            </ul>
+                        </section>  
+
+
+                        <h3 id="v1.0.1">Version 1.0.1
                     <small class="release-date">June 29, 2018</small>
                     </h3>
                     <br>
@@ -405,8 +448,8 @@ document.addEventListener('onVideoDismiss', function(){});
                                 </div>
                                 <ul class="changelog">
                                     <li class="ch-added">AMR Android SDK 1.7.8 &nbsp;&nbsp;</li>
-                                    <li class="ch-added">Admob 15.0.1 </li>
-                                    <li class="ch-added">Applovin 8.1.3 </li>
+                                    <li class="ch-added">AdMob 15.0.1 </li>
+                                    <li class="ch-added">AppLovin 8.1.3 </li>
                                     <li class="ch-added">IronSource 6.7.11 </li>
                                     <li class="ch-added">Mopub 5.2.0 </li>
                                     <li class="ch-added">Unity 2.3.0 </li>
@@ -421,8 +464,8 @@ document.addEventListener('onVideoDismiss', function(){});
                             </div>
                             <ul class="changelog">
                                     <li class="ch-added">AMR IOS SDK 1.3.61 &nbsp;&nbsp;</li>
-                                    <li class="ch-added">Admob 7.31 </li>
-                                    <li class="ch-added">Applovin 5.0 </li>
+                                    <li class="ch-added">AdMob 7.31 </li>
+                                    <li class="ch-added">AppLovin 5.0 </li>
                                     <li class="ch-added">Facebook 4.28 </li>
                                     <li class="ch-added">IronSource 6.7 </li>
                                     <li class="ch-added">Mopub 5.0 </li>
@@ -430,14 +473,8 @@ document.addEventListener('onVideoDismiss', function(){});
                                     <li class="ch-added">Unity 2.2 </li>
                                     
                             </ul>
-                        </section>            
-
+                        </section>  
                     </ul>
-
-
-
-
-               
         </article>
         <!-- END Main content -->
     </div>

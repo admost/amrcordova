@@ -13,7 +13,7 @@ module.exports.metadata =
 // TOP OF METADATA
 {
   "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-amr": "1.0.0"
+  "cordova-plugin-amr": "1.1.1"
 };
 // BOTTOM OF METADATA
 });

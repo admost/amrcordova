@@ -9,8 +9,8 @@
   },
   "cordova-plugin-amr": {
     "source": {
-      "type": "registry",
-      "id": "https://github.com/admost/AMR-CORDOVA-PLUGIN.git"
+      "type": "local",
+      "path": "/Users/mhmtkrgz/Documents/dev/mediation/mediation.cordova.docs/test/node_modules/Cordova-Plugin-AMR"
     },
     "is_top_level": true,
     "variables": {}
