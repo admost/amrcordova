@@ -10,7 +10,7 @@
   "cordova-plugin-amr": {
     "source": {
       "type": "local",
-      "path": "/Users/mhmtkrgz/Documents/dev/mediation/mediation.cordova.docs/test/node_modules/Cordova-Plugin-AMR"
+      "path": "C:\\DevArea\\WEB\\amrcordova\\test\\node_modules\\Cordova-Plugin-AMR"
     },
     "is_top_level": true,
     "variables": {}

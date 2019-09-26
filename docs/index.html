@@ -94,10 +94,10 @@
                     <a href="#requirements">Requirements</a>
                     <ul>
                         <li><a href="#android-version">Android Version</a></li>
-                        
+
                     </ul>
                 </li>
-                
+
                 <li>
                     <a href="#usage">Usage</a>
                     <ul>
@@ -109,27 +109,27 @@
                         <li><a href="#interstitial">Interstitial Ads</a></li>
                         <li><a href="#rewarded">Rewarded</a></li>
 
-                            
+
 						</ul>
                </li>
-						
+
 				 <li>
                     <a href="#gdpr">GDPR</a>
 					 <ul>
 					 <li><a href="#networkcomplience">Network GDPR Complience</a></li>
 					 <li><a href="#gdprrules">GDPR Rules</a></li>
-					 
+
 					 </ul>
-                
+
                </li>
 
 
-                
+
                 <li><a href="#extras">Extras</a>
                     <ul>
                         <li><a href="#dfp">DFP/Admob Mediation Integration</a></li>
                         <li><a href="#testsuite">Test Suite</a></li>
-					
+
                     </ul>
                 </li>
                 <li><a href="#release-notes">Release Notes</a>
@@ -138,7 +138,7 @@
                             <a href="#versions">Versions</a>
                         </li>
                     </ul>
-                
+
 
             </ul>
 
@@ -152,18 +152,13 @@
             <section>
                 <h2 id="overview">Overview</h2>
                 <p>The following document detaily shows that how to integrate AMR Cordova Plugin and networks. You can download plugin <a href="https://github.com/admost/AMR-CORDOVA-PLUGIN">here</a></p>
-                
-                After you download make sure you change AdMob and AppLovin keys in plugin.xml. 
-            
-               <pre><code>///Android 
-&lt;meta-data
-android:name="com.google.android.gms.ads.APPLICATION_ID"
-android:value="YOUR SDK KEY"/&gt;
-&lt;meta-data
-    android:name="applovin.sdk.key"
-    android:value="YOUR SDK KEY"/&gt;
-    
-    
+
+                After you download make sure you change AdMob and AppLovin keys in plugin.xml.
+
+               <pre><code>///Android
+// Please see the Android Notes section below.
+
+
 ///IOS
 &lt;config-file target="*-Info.plist" parent="GADApplicationIdentifier"&gt;
         &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
@@ -172,29 +167,68 @@ android:value="YOUR SDK KEY"/&gt;
         &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
 &lt; /config-file&gt;
                 </code></pre>
-                
-                    
-            <code>cordova plugin add /plugin/location</code> 
+                <b>Add the downloaded plugin with the command: </b><code>  $ cordova plugin add /admost-plugin/location</code>
+
+                <br><br>
+                <h3>Android Notes</h3>
+        				<p> Starting with Android 9.0 (API level 28), cleartext support is disabled by default. For applications <b>targetSdkVersion higher than 27</b> must use the following manifest config for AdMost <b>cleartext support.</b> </p>
+        				<pre><code id="code-androidmanifest2">
+&lt;manifest &gt;
+            &lt;application
+                ...
+                android:networkSecurityConfig="@xml/admost_network_security_config"
+                ...
+            &gt;
+
+            &lt;/application&gt;
+&lt;/manifest&gt;
+        				</code></pre>
+
+        				<p> If you are using Admob SDK (com.google.android.gms:play-services-ads)  with version <b>17.0.0 and higher</b>, you must add your <b>AdMob App ID</b> to your Android Manifest file. </p>
+        			<pre><code id="code-androidmanifest2">
+&lt;manifest&gt;
+        &lt;application&gt;
+            &lt;!-- Sample AdMob App ID: ca-app-pub-0000000000000000~0000000000 --&gt;
+            &lt;meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="[ADMOB_APP_ID]"/&gt;
+        &lt;/application&gt;
+&lt;/manifest&gt;
+              </code></pre>
+              <p> If you are using Applovin, add the following lines inside <application> tag in /app/src/main/AndroidManifest.xml file and enter your Applovin SDK key which can be obtained from Applovin dashboard.</p>
+              <pre><code>
+&lt;manifest&gt;
+      &lt;application&gt;
+          &lt;meta-data
+          android:name="applovin.sdk.key" android:value="YOUR_SDK_KEY_FROM_APPLOVIN"/&gt;
+      &lt;/application&gt;
+&lt;/manifest&gt;
+
+
+            </code></pre>
+
+
+
             </section>
 
             <section>
                 <h2 id="requirements">Requirements</h2>
                 <h3 id="android-version">Android Platform Version</h3>
-                <p> Android 6.4 </p>
-                
+                <p> Cordova Android Plugin 6.4 and over</p>
 
-           
+
+
 
                 <h3 id="app-id-zone-id">App ID & Zone ID</h3>
 
                 <p>Application Id provided in Admost Mediation Dashboard.
                     Zone Id(s) provided in <a href="http://dashboard.admost.com/" target="_blank">Admost Mediation
                         Dashboard</a>.</p>
-                
-                
+
+
             </section>
 
-            
+
 
             <section>
                 <h2 id="usage">Usage</h2>
@@ -204,20 +238,20 @@ android:value="YOUR SDK KEY"/&gt;
                 <h3 id="init">Init Ads</h3>
                 <p>Initialize the Admost Mediation SDK in your application’s launcher Activity. This starts pre-caching
                     and prepares the SDK to display ads.</p>
-                <pre><code class="language-javascript"> 
+                <pre><code class="language-javascript">
 var inputs = {"applicationIdAndroid" : " < ADMOST_ANDROID_APP_ID > ","applicationIdIOS" : " < ADMOST_IOS_APP_ID > ", "userConsent" : " < userConsent >", "subjectToGdpr" : " < subjectToGdpr > "};
-        
-        
+
+
 window.plugins.Amr.startWithConfig(inputs);</code></pre>
 
-          
+
 
                <h4 id="initgdpr">GDPR</h4>
-			     <p> Once you have collected the user’s consent, you can pass it onto the SDK using the init configuration parameters shown above.  </p> 
+			     <p> Once you have collected the user’s consent, you can pass it onto the SDK using the init configuration parameters shown above.  </p>
 				  <p><code>"userConsent" : " < userConsent > "</code> If you have the user’s consent, set it "1". If you do not have the user's consent, set it "0".  </p>
-				  <p><code>"subjectToGdpr" : " < subjectToGdpr > "</code> If you know the user is subject to GDPR, set it "1". If you know the user is not subject to GDPR, set it "0". </p> 
+				  <p><code>"subjectToGdpr" : " < subjectToGdpr > "</code> If you know the user is subject to GDPR, set it "1". If you know the user is not subject to GDPR, set it "0". </p>
 				 <p>If you don’t pass the user’s consent or subjectToGDPR to the SDK, the rules described in  <a href="#gdprrules">GDPR</a>  have been applied.  </p>
-				
+
 
                 <h3 id="banner-ads">Banner Ads</h3>
                 <pre><code class="language-javascript">
@@ -235,8 +269,8 @@ document.addEventListener('onBannerReady', function(){});
 
 document.addEventListener('onBannerLoad', function(){});
 
-document.addEventListener('onBannerFail', function(e){ 
-            	alert("error: " + e.error); 
+document.addEventListener('onBannerFail', function(e){
+            	alert("error: " + e.error);
             });
 
 document.addEventListener('onBannerShow', function(){});
@@ -245,24 +279,24 @@ document.addEventListener('onBannerDestroy', function(){});
 
 </code></pre>
 
-                
+
                 <h3 id="interstitial">Interstitial</h3>
 
-                <pre><code class="language-javascript">               
+                <pre><code class="language-javascript">
 window.plugins.Amr.loadInterstitial({"interstitialIdAndroid" : "< ADMOST_ANDROID_INTERSTITIAL_ZONE_ID >", "interstitialIdIOS" : "< ADMOST_IOS_INTERSTITIAL_ZONE_ID >", "autoShowInterstitial": true/false});
-                
+
 window.plugin.Amr.showInterstitial();
 
 window.plugins.Amr.destroyInterstitial();
-                
-                
-                
+
+
+
                 </code></pre>
 <pre><code class="language-javascript">
 document.addEventListener('onInterstitialReady', function(){});
 
-document.addEventListener('onInterstitialFail', function(e){ 
-            	alert("error: " + e.error); 
+document.addEventListener('onInterstitialFail', function(e){
+            	alert("error: " + e.error);
             });
 
 document.addEventListener('onInterstitialShow', function(){});
@@ -271,15 +305,15 @@ document.addEventListener('onInterstitialDismiss', function(){});
 
 </code></pre>
 
-                
-                
+
+
                 <h3 id="rewarded">Rewarded</h3>
 
                 <pre><code class="language-javascript">window.plugins.Amr.loadRewardedVideo({"videoIdAndroid" : "< ADMOST_ANDROID_VIDEO_ZONE_ID >","videoIdIOS" : "< ADMOST_IOS_VIDEO_ZONE_ID >", "autoShowVideo" : true/false});
-                
-window.plugins.Amr.showRewardedVideo(); 
 
-window.plugins.Amr.destroyRewardedVideo(); 
+window.plugins.Amr.showRewardedVideo();
+
+window.plugins.Amr.destroyRewardedVideo();
 </code></pre>
 
 
@@ -288,8 +322,8 @@ document.addEventListener('onVideoReady', function(){});
 
 document.addEventListener('onVideoComplete', function(){});
 
-document.addEventListener('onVideoFail', function(e){ 
-            	alert("error: " + e.error); 
+document.addEventListener('onVideoFail', function(e){
+            	alert("error: " + e.error);
             });
 
 document.addEventListener('onVideoShow', function(){});
@@ -300,21 +334,21 @@ document.addEventListener('onVideoDismiss', function(){});
 
 
 
-                
-                
-                
+
+
+
 				 <h2 id="gdpr">GDPR</h2>
-				 
-                <p>We specified your responsibilities for obtaining consent from end-users of your apps in our updated <a href="https://www.admost.com/privacy-policy">Privacy Policy</a>. By updating GDPR compatible SDK you agree that you’re responsible for inform the end-users and take their consent. 
+
+                <p>We specified your responsibilities for obtaining consent from end-users of your apps in our updated <a href="https://www.admost.com/privacy-policy">Privacy Policy</a>. By updating GDPR compatible SDK you agree that you’re responsible for inform the end-users and take their consent.
 						Please note that the consent collection applies only to users located in the European Economic Area, the United Kingdom, and Switzerland.
-						As data controller you should take consent of end-users by preparing consent window, you can find samples below. When you take end-user consent, the response will be passed to Admost SDK. 
+						As data controller you should take consent of end-users by preparing consent window, you can find samples below. When you take end-user consent, the response will be passed to Admost SDK.
 						You can find the implementation  <a href="#init">here</a> </p>
 				<img class="img-responsive"
                                  src="assets/img/consent.png"
                                  alt="consent">
-				 
+
 				<h3 id="gdprrules">GDPR Rules</h3>
-				
+
 					 <p>Admost provides you two input parameter for GDPR compatibility:  <code>"subjectToGdpr" </code> and <code>"userConsent"</code>. </p>
 					 <p>If you can determine whether the user is located in European Union or not, you can use optional <code>"subjectToGdpr"</code> to set user's subject to GDPR flag. If you do not use this method, subjectToGdpr status remains as unknown. In this case, Admost SDK will try to determine whether the user is in EU or not which is totally under the responsibility of you. If the user is in EU, networks are not allowed to show personalized ads. If the user is not located in EU, the ad networks are allowed to show personalized ads. </p>
 					<p>On condition that you want to obtain neither user's subjectToGdpr status nor any negative legal consequences, SubjectToGDPR must set <code> "subjectToGdpr": "1" </code> for each user. In this case, Admost considers all users as subject to GDPR and if the consent is not allowed, Admost blocks ad networks to collect data from users. Which may cause a decrease in overall revenue performance apart from Admost. </p>
@@ -322,7 +356,7 @@ document.addEventListener('onVideoDismiss', function(){});
 					<p>If you do not use<code>"userConsent"</code>, user consent status remains unknown. In this case, if you provide <code>"subjectToGdpr": "1"</code>, the ad networks do not have the ability to serve personalized ads. If you provide <code>"subjectToGdpr": "0" </code>, the ad networks have the ability to serve personalized ads. </p>
 					<p>If you do not provide both <code>"userConsent"</code> and <code>"subjectToGdpr"</code>, Admost decides whether the user is located in EU or not which is totally under the responsibility of you.  </p>
 					<p>If you want to obtain neither the user's consent nor any negative legal consequences, you must set <code>"userConsent" : "0" </code> for every user. In this case, Admost considers the user has no consent,  the ad networks are not allowed to serve personalized ads, except only you do not provide  <code>"subjectToGdpr": "0" </code>.</p>
-				
+
                 <h2 id="extras">Extras</h2>
 
                 <h3 id="dfp">DFP/AdMob Mediation Integration</h3>
@@ -365,7 +399,7 @@ document.addEventListener('onVideoDismiss', function(){});
                 </p>
 
                 <pre><code class="language-javascript">
-                
+
                 window.plugins.Amr.startTestSuite();
 
                 </code></pre>
@@ -382,7 +416,7 @@ document.addEventListener('onVideoDismiss', function(){});
 
                     </div>
                 </div>
-                
+
                  <section>
                 <h2 id="release-notes">Release Notes</h2>
 
@@ -391,18 +425,48 @@ document.addEventListener('onVideoDismiss', function(){});
                         new features, etc.</p>
 
                     <ol class="toc">
+                        <li><a href="#v1.1.2">Version 1.1.2</a></li>
                         <li><a href="#v1.1.1">Version 1.1.1</a></li>
                         <li><a href="#v1.0.1">Version 1.0.1</a></li>
-                        
+
                          </ol>
                 </header>
-                
+
                 <section id="versions">
+                  <h3 id="v1.1.2">Version 1.1.2
+                            <small class="release-date">Sept 26, 2019</small>
+                            </h3>
+                            <br>
+                            <ul class="changelog">
+                                <section id="changelog-android-1.1.2">
+                                  <div class="promo left small-icon" style="">
+                                            <i class="fa fa-android" style="color: #00af97"></i>
+                                            <h3>Android</h3>
+                                        </div>
+                                        <ul class="changelog">
+                                          <li class="ch-updated">Target SDK is updated to 28</li>
+                                          <li class="ch-updated">Android-cordova plugin upgrated from 6.4 to 8.1.0</li>
+                                          <li class="ch-updated">Package renaming/relocation of Amr.js and Amr.java classes</li>
+                                          <li class="ch-updated">Applovin and Admob meta-data removed from plugin.xml. You need to add it manually from now on.</li>
+                                        </ul>
+                                </section>
+
+                                <section id="changelog-ios-1.1.2">
+                                    <div class="promo left small-icon" style="">
+                                        <i class="fa fa-apple" style="color: #0b0b0b"></i>
+                                        <h3>iOS</h3>
+                                    </div>
+                                    <ul class="changelog">
+
+
+                                    </ul>
+                                </section>
+
 					<h3 id="v1.1.1">Version 1.1.1
                     <small class="release-date">Sept 20, 2019</small>
                     </h3>
                     <br>
-                    <ul class="changelog"> 
+                    <ul class="changelog">
 
                         <section id="changelog-android-1.1.1">
                           <div class="promo left small-icon" style="">
@@ -410,7 +474,8 @@ document.addEventListener('onVideoDismiss', function(){});
                                     <h3>Android</h3>
                                 </div>
                                 <ul class="changelog">
-                                </ul>      
+
+                                </ul>
                         </section>
 
                         <section id="changelog-ios-1.1.1">
@@ -430,16 +495,16 @@ document.addEventListener('onVideoDismiss', function(){});
                                     <li class="ch-updated">UnityAds 3.2 </li>
                                     <li class="ch-added">YandexAds 2.13 </li>
                                     <li class="ch-added">YouAppi 4.4 </li>
-                                    
+
                             </ul>
-                        </section>  
+                        </section>
 
 
                         <h3 id="v1.0.1">Version 1.0.1
                     <small class="release-date">June 29, 2018</small>
                     </h3>
                     <br>
-                    <ul class="changelog"> 
+                    <ul class="changelog">
 
                         <section id="changelog-android-1.0.1">
                           <div class="promo left small-icon" style="">
@@ -454,7 +519,7 @@ document.addEventListener('onVideoDismiss', function(){});
                                     <li class="ch-added">Mopub 5.2.0 </li>
                                     <li class="ch-added">Unity 2.3.0 </li>
                                     <li class="ch-added">Multidex Support</li>
-                                </ul>      
+                                </ul>
                         </section>
 
                         <section id="changelog-ios-1.0.1">
@@ -471,9 +536,9 @@ document.addEventListener('onVideoDismiss', function(){});
                                     <li class="ch-added">Mopub 5.0 </li>
                                     <li class="ch-added">Tapjoy 11.12 </li>
                                     <li class="ch-added">Unity 2.2 </li>
-                                    
+
                             </ul>
-                        </section>  
+                        </section>
                     </ul>
         </article>
         <!-- END Main content -->
