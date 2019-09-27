@@ -151,25 +151,21 @@
 
             <section>
                 <h2 id="overview">Overview</h2>
-                <p>The following document detaily shows that how to integrate AMR Cordova Plugin and networks. You can download plugin <a href="https://github.com/admost/AMR-CORDOVA-PLUGIN">here</a></p>
-
-                After you download make sure you change AdMob and AppLovin keys in plugin.xml.
-
-               <pre><code>///Android
-// Please see the Android Notes section below.
-
-
-///IOS
-&lt;config-file target="*-Info.plist" parent="GADApplicationIdentifier"&gt;
-        &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
-&lt; /config-file&gt;
-&lt;config-file target="*-Info.plist" parent="AppLovinSdkKey"&gt;
-        &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
-&lt; /config-file&gt;
-                </code></pre>
+                <p>The following document detaily shows that how to integrate AMR Cordova Plugin and networks. </p>
+                <p>You can download plugin <a href="https://github.com/admost/AMR-CORDOVA-PLUGIN"><b>here</b></a></p>
                 <b>Add the downloaded plugin with the command: </b><code>  $ cordova plugin add /admost-plugin/location</code>
 
-                <br><br>
+                <h3>IOS Notes</h3>
+        				<p>  After you download make sure you change AdMob and AppLovin keys in plugin.xml. </p>
+                <pre><code>
+ &lt;config-file target="*-Info.plist" parent="GADApplicationIdentifier"&gt;
+         &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
+ &lt; /config-file&gt;
+ &lt;config-file target="*-Info.plist" parent="AppLovinSdkKey"&gt;
+         &lt;string&gt;YOUR SDK KEY &lt;/string &gt;
+ &lt; /config-file&gt;
+                 </code></pre>
+
                 <h3>Android Notes</h3>
         				<p> Starting with Android 9.0 (API level 28), cleartext support is disabled by default. For applications <b>targetSdkVersion higher than 27</b> must use the following manifest config for AdMost <b>cleartext support.</b> </p>
         				<pre><code id="code-androidmanifest2">

@@ -1,0 +1,71 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Amr\"><param name=\"ios-package\" value=\"CDVAmr\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "*-Info.plist": {
+        "parents": {
+          "NSAppTransportSecurity": [
+            {
+              "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>",
+              "count": 1
+            }
+          ],
+          "NSCalendarsUsageDescription": [
+            {
+              "xml": "<string>Some ad content may access calendar</string>",
+              "count": 1
+            }
+          ],
+          "AppLovinSdkKey": [
+            {
+              "xml": "<string>YOUR_KEY</string>",
+              "count": 1
+            }
+          ],
+          "GADApplicationIdentifier": [
+            {
+              "xml": "<string>YOUR_KEY</string>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-amr": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-amr.Amr",
+      "file": "plugins/cordova-plugin-amr/www/Amr.js",
+      "pluginId": "cordova-plugin-amr",
+      "clobbers": [
+        "window.plugins.Amr"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-whitelist": "1.3.4",
+    "cordova-plugin-amr": "1.1.2"
+  }
+}

@@ -1,0 +1,78 @@
+{
+    "declarations": {},
+    "sources": {},
+    "libraries": {
+        "AMRAdapterAdcolony": {
+            "name": "AMRAdapterAdcolony",
+            "type": "podspec",
+            "spec": "~> 3.3",
+            "count": 1
+        },
+        "AMRAdapterAdmob": {
+            "name": "AMRAdapterAdmob",
+            "type": "podspec",
+            "spec": "~> 7.49",
+            "count": 1
+        },
+        "AMRAdapterAdmost": {
+            "name": "AMRAdapterAdmost",
+            "type": "podspec",
+            "spec": "~> 1.2",
+            "count": 1
+        },
+        "AMRAdapterApplovin": {
+            "name": "AMRAdapterApplovin",
+            "type": "podspec",
+            "spec": "~> 6.8",
+            "count": 1
+        },
+        "AMRAdapterFacebook": {
+            "name": "AMRAdapterFacebook",
+            "type": "podspec",
+            "spec": "~> 5.5",
+            "count": 1
+        },
+        "AMRAdapterIronsource": {
+            "name": "AMRAdapterIronsource",
+            "type": "podspec",
+            "spec": "~> 6.8",
+            "count": 1
+        },
+        "AMRAdapterMintegral": {
+            "name": "AMRAdapterMintegral",
+            "type": "podspec",
+            "spec": "~> 5.5",
+            "count": 1
+        },
+        "AMRAdapterMytarget": {
+            "name": "AMRAdapterMytarget",
+            "type": "podspec",
+            "spec": "~> 5.3",
+            "count": 1
+        },
+        "AMRAdapterUnity": {
+            "name": "AMRAdapterUnity",
+            "type": "podspec",
+            "spec": "~> 3.2",
+            "count": 1
+        },
+        "AMRAdapterVungle": {
+            "name": "AMRAdapterVungle",
+            "type": "podspec",
+            "spec": "~> 6.3",
+            "count": 1
+        },
+        "AMRAdapterYandex": {
+            "name": "AMRAdapterYandex",
+            "type": "podspec",
+            "spec": "~> 2.13",
+            "count": 1
+        },
+        "AMRAdapterYouappi": {
+            "name": "AMRAdapterYouappi",
+            "type": "podspec",
+            "spec": "~> 4.4",
+            "count": 1
+        }
+    }
+}

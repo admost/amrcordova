@@ -1,7 +1,7 @@
 {
   "name": "com.kokteyl.amr.test",
   "displayName": "test",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,8 @@
       "cordova-plugin-amr": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   },
   "devDependencies": {
