@@ -4,7 +4,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         id="cordova-plugin-amr"
-        version="1.1.2">
+        version="1.1.4">
 
     <name>Cordova AMR Plugin</name>
 	<description>Admost Mediation Router plugin.</description>
@@ -31,8 +31,16 @@
     		<config-file target="AndroidManifest.xml" parent="/*">
     		    <uses-permission android:name="android.permission.INTERNET"/>
     		    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-            <uses-permission android:name="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"/>
-    		  </config-file>
+                <uses-permission android:name="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"/>
+            </config-file>
+            <config-file target="AndroidManifest.xml" parent="/manifest/application">
+                <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" android:enabled="true" >
+                    <intent-filter>
+                        <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                        <data android:scheme="package"/>
+                    </intent-filter>
+                </receiver>
+            </config-file>
 
     		<config-file target="config.xml" parent="/*">
     		    <feature name="Amr">
@@ -74,18 +82,17 @@
         <header-file src="src/ios/CDVAmr.h" />
         <source-file src="src/ios/CDVAmr.m" />
 
-        <framework src="AMRAdapterAdcolony" type="podspec" spec="~> 3.3" />
-        <framework src="AMRAdapterAdmob" type="podspec" spec="~> 7.49" />
+        <framework src="AMRAdapterAdcolony" type="podspec" spec="~> 4.1" />
+        <framework src="AMRAdapterAdmob" type="podspec" spec="~> 7.55" />
         <framework src="AMRAdapterAdmost" type="podspec" spec="~> 1.2" />
-        <framework src="AMRAdapterApplovin" type="podspec" spec="~> 6.8" />
-        <framework src="AMRAdapterFacebook" type="podspec" spec="~> 5.5" />
-        <framework src="AMRAdapterIronsource" type="podspec" spec="~> 6.8" />
-        <framework src="AMRAdapterMintegral" type="podspec" spec="~> 5.5" />
-        <framework src="AMRAdapterMytarget" type="podspec" spec="~> 5.3" />
-        <framework src="AMRAdapterUnity" type="podspec" spec="~> 3.2" />
-        <framework src="AMRAdapterVungle" type="podspec" spec="~> 6.3" />
-        <framework src="AMRAdapterYandex" type="podspec" spec="~> 2.13" />
-        <framework src="AMRAdapterYouappi" type="podspec" spec="~> 4.4" />
+        <framework src="AMRAdapterApplovin" type="podspec" spec="~> 6.11" />
+        <framework src="AMRAdapterChartboost" type="podspec" spec="~> 8.0" />
+        <framework src="AMRAdapterFacebook" type="podspec" spec="~> 5.7" />
+        <framework src="AMRAdapterIronsource" type="podspec" spec="~> 6.13" />
+        <framework src="AMRAdapterMintegral" type="podspec" spec="~> 5.8" />
+        <framework src="AMRAdapterOgury" type="podspec" spec="~> 1.2" />
+        <framework src="AMRAdapterTapjoy" type="podspec" spec="~> 12.4" />
+        <framework src="AMRAdapterUnity" type="podspec" spec="~> 3.4" />
 
     </platform>
 </plugin>

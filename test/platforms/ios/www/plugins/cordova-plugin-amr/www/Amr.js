@@ -1,7 +1,7 @@
 cordova.define("cordova-plugin-amr.Amr", function(require, exports, module) {
 
 var argscheck = require ('cordova/argscheck'),
-    exec = require('cordova/exec');
+	exec = require('cordova/exec');
 
 var amrExport = {};
 
@@ -11,63 +11,63 @@ var amrExport = {};
  * @const
  */
 amrExport.AD_SIZE = {
-  BANNER: 50,
-  LEADERBOARD: 90,
-  MEDIUM_RECTANGLE: 250
+	BANNER: 50,
+	LEADERBOARD: 90,
+	MEDIUM_RECTANGLE: 250
 };
 
 amrExport.AMRSdkConfig =
 	function(config, successCallback, failureCallback) {
-	  if(typeof config === 'object' 
-		  && typeof config.amrAppId === 'string'
-	      && config.amrAppId.length > 0) {
-		  cordova.exec(
-			      successCallback,
-			      failureCallback,
-			      'Amr',
-			      'AMRSdkConfig',
-			      [config]
-			  );
-	  } else {
-		  if(typeof failureCallback === 'function') {
-			  failureCallback('config.amrAppId should be specified.')
-		  }
-	  }
+		if(typeof config === 'object' 
+			&& typeof config.amrAppId === 'string'
+			&& config.amrAppId.length > 0) {
+			cordova.exec(
+					successCallback,
+					failureCallback,
+					'Amr',
+					'AMRSdkConfig',
+					[config]
+				);
+		} else {
+			if(typeof failureCallback === 'function') {
+				failureCallback('config.amrAppId should be specified.')
+			}
+		}
 	};
 	
 amrExport.startWithConfig =
 function(config, successCallback, failureCallback) {
-  cordova.exec(
-      successCallback,
-      failureCallback,
-      'Amr',
-      'startWithConfig',
-      [ config ]
-  );
+	cordova.exec(
+		successCallback,
+		failureCallback,
+		'Amr',
+		'startWithConfig',
+		[ config ]
+	);
 };
 
 amrExport.startTestSuite =
 function(config, successCallback, failureCallback) {
-    cordova.exec(
-                 successCallback,
-                 failureCallback,
-                 'Amr',
-                 'startTestSuite',
-                 [ config ]
-                 );
+	cordova.exec(
+					successCallback,
+					failureCallback,
+					'Amr',
+					'startTestSuite',
+					[ config ]
+					);
 };
 
 	
 amrExport.loadBanner =
 function(config, successCallback, failureCallback) {
-  if(typeof config === 'undefined' || config == null) config = {};
-  cordova.exec(
-      successCallback,
-      failureCallback,
-      'Amr',
-      'loadBanner',
-      [ config ]
-  );
+	if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+		successCallback,
+		failureCallback,
+		'Amr',
+		'loadBanner',
+		[ config ]
+	);
 };
 
 
@@ -78,7 +78,7 @@ function(successCallback, failureCallback) {
 		failureCallback, 
 		'Amr', 
 		'hideBanner', 
-        []
+		[]
 		
 	);
 };
@@ -86,51 +86,51 @@ function(successCallback, failureCallback) {
 
 amrExport.destroyBanner =
 function(config, successCallback, failureCallback) {
-  if(typeof config === 'undefined' || config == null) config = {};
-  cordova.exec(
-	      successCallback,
-	      failureCallback,
-	      'Amr',
-	      'destroyBanner',
-	      []
-	  );
+	if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+			successCallback,
+			failureCallback,
+			'Amr',
+			'destroyBanner',
+			[]
+		);
 };
 
 amrExport.destroyInterstitial =
 function(config, successCallback, failureCallback) {
-  if(typeof config === 'undefined' || config == null) config = {};
-  cordova.exec(
-	      successCallback,
-	      failureCallback,
-	      'Amr',
-	      'destroyInterstitial',
-	      []
-	  );
+	if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+			successCallback,
+			failureCallback,
+			'Amr',
+			'destroyInterstitial',
+			[]
+		);
 };
 
 amrExport.destroyRewardedVideo =
 function(config, successCallback, failureCallback) {
-  if(typeof config === 'undefined' || config == null) config = {};
-  cordova.exec(
-	      successCallback,
-	      failureCallback,
-	      'Amr',
-	      'destroyRewardedVideo',
-	      []
-	  );
+	if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+			successCallback,
+			failureCallback,
+			'Amr',
+			'destroyRewardedVideo',
+			[]
+		);
 };
 
 
 amrExport.loadInterstitial =
 function(config, successCallback, failureCallback) {
-	  if(typeof config === 'undefined' || config == null) config = {};
-  cordova.exec(
-      successCallback,
-      failureCallback,
-      'Amr',
-      'loadInterstitial',
-      [ config ]
-  );
+		if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+		successCallback,
+		failureCallback,
+		'Amr',
+		'loadInterstitial',
+		[ config ]
+	);
 };
 
 amrExport.showInterstitial = 
@@ -150,14 +150,14 @@ amrExport.showInterstitial =
 
 amrExport.loadRewardedVideo =
 function(config, successCallback, failureCallback) {
-	  if(typeof config === 'undefined' || config == null) config = {};
-  cordova.exec(
-      successCallback,
-      failureCallback,
-      'Amr',
-      'loadRewardedVideo',
-      [ config ]
-  );
+		if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+		successCallback,
+		failureCallback,
+		'Amr',
+		'loadRewardedVideo',
+		[ config ]
+	);
 };
 
 amrExport.showRewardedVideo = 
@@ -173,9 +173,36 @@ amrExport.showRewardedVideo =
 			'showRewardedVideo', 
 			[ show ]
 		);
-};			
+};
+
+amrExport.loadAndShowRewardedVideo =
+    function(config, successCallback, failureCallback) {
+		if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+		successCallback,
+		failureCallback,
+		'Amr',
+		'loadAndShowRewardedVideo',
+		[ config ]
+	);
+};
+
+amrExport.loadAndShowInterstitial =
+    function(config, successCallback, failureCallback) {
+		if(typeof config === 'undefined' || config == null) config = {};
+	cordova.exec(
+		successCallback,
+		failureCallback,
+		'Amr',
+		'loadAndShowInterstitial',
+		[ config ]
+	);
+};
+
 
 module.exports = amrExport;
+
+	
 
 
 

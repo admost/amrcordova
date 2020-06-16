@@ -75,6 +75,11 @@ var app = {
         document.addEventListener('onInterstitialReady',  window.plugins.Amr.showInterstitial);
 
         document.getElementById("testSuite").addEventListener('click',  window.plugins.Amr.startTestSuite);
+
+        document.getElementById("loadAndShowInterstitial").addEventListener('click',  window.plugins.Amr.loadAndShowInterstitial);
+
+        document.getElementById("loadAndShowRewarded").addEventListener('click',  window.plugins.Amr.loadAndShowRewardedVideo);
+
             //window.plugins.Amr.requestVideoAd(inputs);
 
             //window.plugins.Amr.startTestSuite(inputs);

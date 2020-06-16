@@ -5,13 +5,13 @@
         "AMRAdapterAdcolony": {
             "name": "AMRAdapterAdcolony",
             "type": "podspec",
-            "spec": "~> 3.3",
+            "spec": "~> 4.1",
             "count": 1
         },
         "AMRAdapterAdmob": {
             "name": "AMRAdapterAdmob",
             "type": "podspec",
-            "spec": "~> 7.49",
+            "spec": "~> 7.55",
             "count": 1
         },
         "AMRAdapterAdmost": {
@@ -23,55 +23,49 @@
         "AMRAdapterApplovin": {
             "name": "AMRAdapterApplovin",
             "type": "podspec",
-            "spec": "~> 6.8",
+            "spec": "~> 6.11",
+            "count": 1
+        },
+        "AMRAdapterChartboost": {
+            "name": "AMRAdapterChartboost",
+            "type": "podspec",
+            "spec": "~> 8.0",
             "count": 1
         },
         "AMRAdapterFacebook": {
             "name": "AMRAdapterFacebook",
             "type": "podspec",
-            "spec": "~> 5.5",
+            "spec": "~> 5.7",
             "count": 1
         },
         "AMRAdapterIronsource": {
             "name": "AMRAdapterIronsource",
             "type": "podspec",
-            "spec": "~> 6.8",
+            "spec": "~> 6.13",
             "count": 1
         },
         "AMRAdapterMintegral": {
             "name": "AMRAdapterMintegral",
             "type": "podspec",
-            "spec": "~> 5.5",
+            "spec": "~> 5.8",
             "count": 1
         },
-        "AMRAdapterMytarget": {
-            "name": "AMRAdapterMytarget",
+        "AMRAdapterOgury": {
+            "name": "AMRAdapterOgury",
             "type": "podspec",
-            "spec": "~> 5.3",
+            "spec": "~> 1.2",
+            "count": 1
+        },
+        "AMRAdapterTapjoy": {
+            "name": "AMRAdapterTapjoy",
+            "type": "podspec",
+            "spec": "~> 12.4",
             "count": 1
         },
         "AMRAdapterUnity": {
             "name": "AMRAdapterUnity",
             "type": "podspec",
-            "spec": "~> 3.2",
-            "count": 1
-        },
-        "AMRAdapterVungle": {
-            "name": "AMRAdapterVungle",
-            "type": "podspec",
-            "spec": "~> 6.3",
-            "count": 1
-        },
-        "AMRAdapterYandex": {
-            "name": "AMRAdapterYandex",
-            "type": "podspec",
-            "spec": "~> 2.13",
-            "count": 1
-        },
-        "AMRAdapterYouappi": {
-            "name": "AMRAdapterYouappi",
-            "type": "podspec",
-            "spec": "~> 4.4",
+            "spec": "~> 3.4",
             "count": 1
         }
     }
