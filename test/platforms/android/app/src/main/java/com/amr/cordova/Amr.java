@@ -1,6 +1,8 @@
 package com.amr.cordova;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -41,7 +44,6 @@ public class Amr extends CordovaPlugin {
      */
     private static final String LOGTAG = "AmrCordova";
     private static final boolean CORDOVA_MIN_4 = Integer.valueOf(CordovaWebView.CORDOVA_VERSION.split("\\.")[0]) >= 4;
-    public static final int LAUNCH_AD_ACTIVITY = 2020;
     /**
      * Cordova Actions.
      */
@@ -78,8 +80,11 @@ public class Amr extends CordovaPlugin {
     private static final String OPT_AUTO_SHOW_INTERSTITIAL = "autoShowInterstitial";
     private static final String OPT_AUTO_SHOW_VIDEO = "autoShowVideo";
     private static final String OPT_SUBJECT_TO_GDPR = "subjectToGdpr";
+    private static final String OPT_SUBJECT_TO_CCPA = "subjectToCCPA";
     private static final String OPT_CONSENT = "userConsent";
     private static final String OPT_AUTO_SHOW_BANNER = "autoShowBanner";
+    private static final String OPT_AUTOSHOW_VIDEO_WITH_ACTIVITY_TIMEOUT = "autoshowVideoWithActivityTimeout";
+    private static final String OPT_AUTOSHOW_INTERSTITIAL_WITH_TIMEOUT = "autoshowInterstitialWithActivityTimeout";
 
 
     /**
@@ -87,6 +92,7 @@ public class Amr extends CordovaPlugin {
      **/
     private String subjectToGdpr = "-1";
     private String consent = "-1";
+    private String subjectToCCPA = "-1";
    /* OPT_SUBJECT_TO_GDPR
     OPT_CONSENT
 */
@@ -97,6 +103,7 @@ public class Amr extends CordovaPlugin {
     private static String onInterstitialReady = "onInterstitialReady";
     private static String onInterstitialFail = "onInterstitialFail";
     private static String onInterstitialShow = "onInterstitialShow";
+    private static String onInterstitialStatusChanged = "onInterstitialStatusChanged";
 
     /**
      * Video Responses
@@ -106,6 +113,7 @@ public class Amr extends CordovaPlugin {
     private static String onVideoFail = "onVideoFail";
     private static String onVideoShow = "onVideoShow";
     private static String onVideoComplete = "onVideoComplete";
+    private static String onVideoStatusChanged = "onVideoStatusChanged";
 
     /**
      * Banner Responses
@@ -166,12 +174,15 @@ public class Amr extends CordovaPlugin {
     SharedPreferences settings;
     SharedPreferences.Editor editor;
 
-    private volatile static Amr instance;
+    private int timeoutForAutoShowWithActivityVideo = 10000;
+    private int timeoutForAutoShowWithActivityInterstitial = 10000;
+
+    volatile static Amr instance;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-
+        instance = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this.cordova.getActivity().getApplicationContext());
         editor = settings.edit();
 
@@ -266,6 +277,8 @@ public class Amr extends CordovaPlugin {
         if (config.has(OPT_CONSENT)) this.consent = config.optString(OPT_CONSENT);
         if (config.has(OPT_SUBJECT_TO_GDPR))
             this.subjectToGdpr = config.optString(OPT_SUBJECT_TO_GDPR);
+        if (config.has(OPT_SUBJECT_TO_CCPA))
+            this.subjectToCCPA = config.optString(OPT_SUBJECT_TO_CCPA);
 
         if (config.has(OPT_BANNER_AT_TOP)) this.bannerAtTop = config.optBoolean(OPT_BANNER_AT_TOP);
         if (config.has(OPT_OVERLAP)) this.bannerOverlap = config.optBoolean(OPT_OVERLAP);
@@ -274,6 +287,10 @@ public class Amr extends CordovaPlugin {
             this.autoShowInterstitial = config.optBoolean(OPT_AUTO_SHOW_INTERSTITIAL);
         if (config.has(OPT_AUTO_SHOW_VIDEO))
             this.autoShowVideo = config.optBoolean(OPT_AUTO_SHOW_VIDEO);
+        if (config.has(OPT_AUTOSHOW_INTERSTITIAL_WITH_TIMEOUT))
+            this.timeoutForAutoShowWithActivityInterstitial = config.optInt(OPT_AUTOSHOW_INTERSTITIAL_WITH_TIMEOUT, 10000);
+        if (config.has(OPT_AUTOSHOW_VIDEO_WITH_ACTIVITY_TIMEOUT))
+            this.timeoutForAutoShowWithActivityVideo = config.optInt(OPT_AUTOSHOW_VIDEO_WITH_ACTIVITY_TIMEOUT, 10000);
     }
 
     private PluginResult executeStartWithConfig(JSONObject config, final CallbackContext callbackContext) {
@@ -287,14 +304,14 @@ public class Amr extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                initAmr(cordova.getActivity(), consent, subjectToGdpr, amrAppId);
+                initAmr(cordova.getActivity(), consent, subjectToGdpr, subjectToCCPA, amrAppId);
                 callbackContext.success();
             }
         });
         return null;
     }
 
-    static void initAmr(Activity activity, String consent, String subjectToGdpr, String appId) {
+    static void initAmr(Activity activity, String consent, String subjectToGdpr, String subjectToCCPA, String appId) {
         if (!AdMost.getInstance().isInitStarted()) {
             AdMostConfiguration.Builder configuration = new AdMostConfiguration.Builder(activity, appId);
             if (!consent.equals("-1"))
@@ -302,6 +319,8 @@ public class Amr extends CordovaPlugin {
 
             if (!subjectToGdpr.equals("-1"))
                 configuration.setSubjectToGDPR(subjectToGdpr.equals("1"));
+            if (!subjectToCCPA.equals("-1"))
+                configuration.setSubjectToCCPA(subjectToCCPA.equals("1"));
             Log.i(LOGTAG, "AdMost Init Called");
             AdMost.getInstance().init(configuration.build(), new AdMostInitListener() {
                 @Override
@@ -446,6 +465,10 @@ public class Amr extends CordovaPlugin {
                     public void onComplete(String s) {
 
                     }
+                    @Override
+                    public void onStatusChanged(int status) {
+                        sendResponseToListener(onInterstitialStatusChanged, String.format("{ 'status': %d }", status));
+                    }
 
                 });
             }
@@ -501,6 +524,11 @@ public class Amr extends CordovaPlugin {
                     public void onClicked(String s) {
                         //Ad Clicked
                     }
+                    
+                    @Override
+                    public void onStatusChanged(int status) {
+                       sendResponseToListener(onVideoStatusChanged, String.format("{ 'status': %d }", status)); 
+                    }
 
                 });
 
@@ -528,12 +556,14 @@ public class Amr extends CordovaPlugin {
                     return;
                 Intent i = new Intent(activity, AmrAdActivity.class);
                 i.putExtra("ZONE_ID", amrVideoZoneId);
-                i.putExtra("IS_REWARDED", false);
+                i.putExtra("IS_REWARDED", true);
                 i.putExtra("APP_ID", amrAppId);
                 i.putExtra("CONSENT", consent);
                 i.putExtra("SUBJECT_TO_GDPR", subjectToGdpr);
-                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // do not use this
-                cordova.startActivityForResult((CordovaPlugin) Amr.this, i, LAUNCH_AD_ACTIVITY);
+                i.putExtra("SUBJECT_TO_CCPA", subjectToCCPA);
+                i.putExtra("TIMEOUT", timeoutForAutoShowWithActivityVideo);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(i);
                 callbackContext.success();
             }
         });
@@ -560,38 +590,16 @@ public class Amr extends CordovaPlugin {
                 i.putExtra("APP_ID", amrAppId);
                 i.putExtra("CONSENT", consent);
                 i.putExtra("SUBJECT_TO_GDPR", subjectToGdpr);
-                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // do not use this
-                activity.startActivityForResult(i, LAUNCH_AD_ACTIVITY);
+                i.putExtra("SUBJECT_TO_CCPA", subjectToCCPA);
+                i.putExtra("TIMEOUT", timeoutForAutoShowWithActivityInterstitial);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(i);
                 callbackContext.success();
             }
         });
         return null;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode != LAUNCH_AD_ACTIVITY || resultCode != Activity.RESULT_OK || intent == null)
-            return;
-        Log.d(LOGTAG, "onActivityResult: " + (intent == null ? "" : intent.getIntExtra("RESULT", -1)));
-        if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.COMPLETED) {
-            sendResponseToListener(onVideoComplete, null);
-            sendResponseToListener(onVideoDismiss, null);
-        } else if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.DISMISS) {
-            if (intent.getBooleanExtra("IS_REWARDED", false)) {
-                sendResponseToListener(onVideoDismiss, null);
-            } else {
-                sendResponseToListener(onInterstitialDismiss, null);
-            }
-
-        } else if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.ON_FAIL) {
-            if (intent.getBooleanExtra("IS_REWARDED", false)) {
-                sendResponseToListener(onVideoFail, null);
-            } else {
-                sendResponseToListener(onInterstitialFail, null);
-            }
-        }
-    }
 
     private PluginResult executeRequestAd(JSONObject config, final CallbackContext callbackContext) {
         this.AMRSdkConfig(config);
@@ -881,6 +889,41 @@ public class Amr extends CordovaPlugin {
         Log.i(LOGTAG, event);
         if (webView != null && webView.isInitialized())
             webView.loadUrl("javascript:cordova.fireDocumentEvent('" + event + "'" + (extra == null ? "" : "," + extra) + ");");
+    }
+
+    public static class EventListener extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(LOGTAG , "EventListener intent received");
+            if(intent.getAction() == null || !intent.getAction().equals("com.amr.plugin.cordova.CALLBACK") || Amr.instance == null){
+                Log.e(LOGTAG, "intent.getAction() == null || !intent.getAction().equals(\"com.amr.plugin.cordova.CALLBACK\") || Amr.instance == null");
+                return;
+            }
+            if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.COMPLETED) {
+                instance.sendResponseToListener(onVideoComplete, null);
+                instance.sendResponseToListener(onVideoDismiss, null);
+            } else if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.ON_READY) {
+                instance.sendResponseToListener(onVideoReady, null);
+            } else if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.ON_SHOWN) {
+                instance.sendResponseToListener(onVideoShow, null);
+            } else if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.DISMISS) {
+                if (intent.getBooleanExtra("IS_REWARDED", false)) {
+                    instance.sendResponseToListener(onVideoDismiss, null);
+                } else {
+                    instance.sendResponseToListener(onInterstitialDismiss, null);
+                }
+
+            } else if (intent.getIntExtra("RESULT", -1) == AmrAdActivity.ON_FAIL) {
+                int errorCode = intent.getIntExtra("ERROR_CODE",-1);
+                if (intent.getBooleanExtra("IS_REWARDED", false)) {
+                    instance.sendResponseToListener(onVideoFail, String.format("{ 'error': %d }", errorCode));
+                } else {
+                    instance.sendResponseToListener(onInterstitialFail, String.format("{ 'error': %d }", errorCode));
+                }
+            }
+
+        }
     }
 
 }

@@ -30,18 +30,26 @@ var app = {
         this.receivedEvent('deviceready');
         var consent;
         var subjectToGdpr;
-        if (document.getElementById("consent") == true) {
+        var subjectToCCPA;
+        if (document.getElementById("consent").checked) {
             consent = "1";
         }
         else {
             consent = "0";
         }
         
-        if (document.getElementById("subjectToGdpr") == true) {
+        if (document.getElementById("subjectToGdpr").checked) {
             subjectToGdpr = "1";
         }
         else {
             subjectToGdpr = "0";
+        }
+        
+        if (document.getElementById("subjectToCCPA").checked){
+            subjectToCCPA = "1";
+        }
+        else {
+            subjectToCCPA = "0";
         }
         
         var inputs = {
@@ -54,7 +62,8 @@ var app = {
             "videoIdAndroid" : "88cfcfd0-2f8c-4aba-9f36-cc0ac99ab140",
             "videoIdIOS" : "2bdefd44-5269-4cbc-b93a-373b74a2f067",
             "userConsent" : consent,
-            "subjectToGdpr" : subjectToGdpr
+            "subjectToGdpr" : subjectToGdpr,
+            "subjectToCCPA" : subjectToCCPA
         };
         
         window.plugins.Amr.startWithConfig(inputs);
@@ -87,6 +96,13 @@ var app = {
         document.addEventListener('onInterstitialFail', function(e){ 
             	alert("error: " + e.error); 
             });
+        document.addEventListener('onInterstitialStatusChanged', function(e){
+            	alert("status: " + e.status);
+            });
+        document.addEventListener('onVideoStatusChanged', function(e){
+            	alert("status: " + e.status);
+            });
+
 
     },
 

@@ -2,17 +2,21 @@
 
 platform :ios, '9.0'
 
-target 'C:\DevArea\WEB\amrcordova\test\platforms\ios\test' do
-	project 'C:\DevArea\WEB\amrcordova\test\platforms\ios\test.xcodeproj'
-	pod 'AMRAdapterAdcolony', '~> 4.1'
-	pod 'AMRAdapterAdmob', '~> 7.55'
-	pod 'AMRAdapterAdmost', '~> 1.2'
-	pod 'AMRAdapterApplovin', '~> 6.11'
-	pod 'AMRAdapterChartboost', '~> 8.0'
-	pod 'AMRAdapterFacebook', '~> 5.7'
-	pod 'AMRAdapterIronsource', '~> 6.13'
-	pod 'AMRAdapterMintegral', '~> 5.8'
-	pod 'AMRAdapterOgury', '~> 1.2'
-	pod 'AMRAdapterTapjoy', '~> 12.4'
+target 'test' do
+	project 'test.xcodeproj'
+	pod 'AMRAdapterAdcolony', '~> 4.2'
+	pod 'AMRAdapterAdmob', '~> 7.62'
+	pod 'AMRAdapterAdmost', '~> 1.3'
+	pod 'AMRAdapterApplovin', '~> 6.13'
+	pod 'AMRAdapterChartboost', '~> 8.2'
+	pod 'AMRAdapterDFP', '~> 7.62'
+	pod 'AMRAdapterFacebook', '~> 5.9'
+	pod 'AMRAdapterIronsource', '~> 6.17'
+	pod 'AMRAdapterMintegral', '~> 6.3'
+	pod 'AMRAdapterOgury', '~> 1.4'
+	pod 'AMRAdapterTapjoy', '~> 12.6'
 	pod 'AMRAdapterUnity', '~> 3.4'
+	pod 'AMRAdapterVungle', '~> 6.7'
+	pod 'AMRAdapterYandex', '~> 2.16'
+	pod 'AMRAdapterYouappi', '~> 5.0'
 end

@@ -10,7 +10,7 @@
   "cordova-plugin-amr": {
     "source": {
       "type": "local",
-      "path": "C:\\DevArea\\WEB\\amrcordova\\test\\node_modules\\Cordova-Plugin-AMR"
+      "path": "/Users/Seyma/Documents/GitHub/amrcordova/amrcordova/test/node_modules/Cordova-Plugin-AMR"
     },
     "is_top_level": true,
     "variables": {}

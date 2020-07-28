@@ -10,14 +10,13 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "Cordova-Plugin-AMR": "file:../../../CORDOVA/AMR-CORDOVA-PLUGIN",
+    "Cordova-Plugin-AMR": "file:../../../AMR-CORDOVA-PLUGIN",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.0.1"
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-amr": {}
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "android",
