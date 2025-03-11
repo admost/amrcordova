@@ -129,7 +129,7 @@
                     <ul>
                         <li><a href="#dfp">DFP/Admob Mediation Integration</a></li>
                         <li><a href="#testsuite">Test Suite</a></li>
-
+                        <li><a href="#iap">In App Purchase Tracking</a></li>
                     </ul>
                 </li>
                 <li><a href="#release-notes">Release Notes</a>
@@ -413,6 +413,37 @@ document.addEventListener('onVideoDismiss', function(){});
                     </div>
                 </div>
 
+
+                <h3 id="iap">In App Purchase Tracking</h3>
+                <p>
+                    The following call is used to track purchases with receipt validation:
+                </p>
+
+                <div class="promo left small-icon">
+                    <i class="fa fa-android" style="color: #00af97"></i>
+                    <h3>Android</h3>
+                </div>
+
+                <pre><code class="language-c">
+                    var inputs = {"purchaseData" : "receipt json","signature" : "signature data", "currency" : "currency", "priceAmountMicros" : 1000000};
+window.plugins.Amr.trackIAPForAndroid(inputs);
+                </code></pre>
+
+                <p>Explanation of parameters:</p>
+                <ul>
+                    <li><b>purchaseData</b> – The purchase receipt for the product
+                    </li>
+                    <li><b>signature</b> – Signature of the purchase
+                    </li>
+                    <li><b>currency</b> – Product currency in ISO 4217 format; e.g. TRY or USD
+                    </li>
+                    <li><b>priceAmountMicros</b> – Product price in micros.
+                    </li>
+
+                </ul>
+
+
+
                  <section>
                 <h2 id="release-notes">Release Notes</h2>
 
@@ -421,6 +452,7 @@ document.addEventListener('onVideoDismiss', function(){});
                         new features, etc.</p>
 
                     <ol class="toc">
+                        <li><a href="#v1.3.0">Version 1.3.0</a></li>
                         <li><a href="#v1.1.2">Version 1.1.2</a></li>
                         <li><a href="#v1.1.1">Version 1.1.1</a></li>
                         <li><a href="#v1.0.1">Version 1.0.1</a></li>
@@ -429,6 +461,22 @@ document.addEventListener('onVideoDismiss', function(){});
                 </header>
 
                 <section id="versions">
+                    <h3 id="v1.3.0">Version 1.3.0
+                            <small class="release-date">Match 11, 2025</small>
+                            </h3>
+                            <br>
+                            <ul class="changelog">
+                                <section id="changelog-android-1.1.2">
+                                  <div class="promo left small-icon" style="">
+                                            <i class="fa fa-android" style="color: #00af97"></i>
+                                            <h3>Android</h3>
+                                        </div>
+                                        <ul class="changelog">
+                                          <li class="ch-updated">Android core sdk version updated to 3.1.6</li>
+                                          <li class="ch-added">trackIAPForAndroid method added</li>
+                                        </ul>
+                                </section>
+
                   <h3 id="v1.1.2">Version 1.1.2
                             <small class="release-date">Sept 26, 2019</small>
                             </h3>
